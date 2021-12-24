@@ -1,0 +1,44 @@
+spring:
+  profiles:
+    active: local
+
+  # Spring Boot 실행시 BATCH 자동 실행 못하게 설정
+  batch:
+    job:
+      enabled: false
+
+  datasource:
+    hikari:
+      jdbc-url: jdbc:oracle:thin:@DESKTOP-1QKOT2I:1525/tifs
+      #jdbc-url: jdbc:edb://10.10.1.170:5444/INOBIS
+      #      jdbc-url: jdbc:h2:tcp://localhost/~/tifscore
+      pool-name: hikari-cp
+      maximum-pool-size: 30
+      minimum-idle: 2
+      #      driver-class-name: org.h2.Driver
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      username: INOBISADM
+      password: INOBISADM
+
+  jpa: #JPA 설정
+    hibernate:
+      ddl-auto: none  # 없으면 만들고 있으면 그대로 사용
+    properties:
+      hibernate:
+        #          enable_lazy_load_no_trans: true
+        #          dialect: org.hibernate.dialect.Oracle10gDialect #방언 설정 https://gigas-blog.tistory.com/119
+        show_sql: false                #하이버네이트가 실행하는 모든 SQL문을 콘솔로 출력해 준다.
+        format_sql: false              #콘솔에 출력되는 JPA 실행 쿼리를 가독성있게 표현한다.
+        use_sql_comments: true        #디버깅이 용이하도록 SQL문 이외에 추가적인 정보를 출력해 준다.
+
+
+#logging:
+#  level:
+#    org.hibernate.type: trace
+
+#spring.batch.job.names: ${job.name:NONE}
+
+
+batch:
+  timeznoe: Asia/Seoul
+  onlineIp: http://127.0.0.1:8080/
