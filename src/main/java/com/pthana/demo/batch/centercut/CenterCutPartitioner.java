@@ -1,6 +1,6 @@
 package com.pthana.demo.batch.centercut;
 
-import com.pthana.demo.batch.centercut.domain.BatchCentercutTargetRepository;
+import com.pthana.demo.batch.centercut.domain.BatchCentercutTargetRepositoryExt;
 import com.pthana.demo.batch.centercut.dto.CenterCutGroupMinMax;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +39,7 @@ public class CenterCutPartitioner implements Partitioner {
 //    @Autowired
 //    private DaoCommonExt daoCommonExt;
 
-    private final BatchCentercutTargetRepository batchCentercutTargetRepository;
+    private final BatchCentercutTargetRepositoryExt batchCentercutTargetRepositoryExt;
 
     private String table = "";
 
@@ -49,9 +49,19 @@ public class CenterCutPartitioner implements Partitioner {
 
     private String grpCd;
     private LocalDate bascDt;
+    private Long startNo;
+    private Long endNo;
 
-    public CenterCutPartitioner(BatchCentercutTargetRepository batchCentercutTargetRepository) {
-        this.batchCentercutTargetRepository = batchCentercutTargetRepository;
+    public CenterCutPartitioner(BatchCentercutTargetRepositoryExt batchCentercutTargetRepositoryExt) {
+        this.batchCentercutTargetRepositoryExt = batchCentercutTargetRepositoryExt;
+    }
+
+    public void setStartNo(Long startNo) {
+        this.startNo = startNo;
+    }
+
+    public void setEndNo(Long endNo) {
+        this.endNo = endNo;
     }
 
 
@@ -116,7 +126,7 @@ public class CenterCutPartitioner implements Partitioner {
         List<CenterCutGroupMinMax> ccList = null;
 
         logger.debug("bascDt=[{}], grpCd=[{}]",bascDt,grpCd);
-        ccList = batchCentercutTargetRepository.getMinMax(bascDt,grpCd);   // By GrpCd,  MIN.MAX,COUNT
+        ccList = batchCentercutTargetRepositoryExt.getMinMaxExt(bascDt,grpCd,startNo,endNo);   // By GrpCd,  MIN.MAX,COUNT
         
         Map<String, ExecutionContext> result = new HashMap<>();
         if(ccList.size() == 0 ) return result;

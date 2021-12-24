@@ -40,7 +40,7 @@ public class CenterCutProcessor implements ItemProcessor<BatchCentercutTarget, B
 
         try {
 
-            log.debug("process=[{}]",itemObj.getSeqNo());
+            log.debug("process=[{}]",itemObj);
 
             /* Online Service Call */
             CbsTran cbsTran = new CbsTran();
@@ -147,6 +147,11 @@ public class CenterCutProcessor implements ItemProcessor<BatchCentercutTarget, B
             itemObj.setErrMsg(e.getMessage());
             itemObj.setErrCd("999999999");
         }
+
+        itemObj.setRegEmpNo("B0888U1");
+        itemObj.setSysRegDtm(ZonedDateTime.now());
+        itemObj.setUpdEmpNo("B0888U1");
+        itemObj.setSysUpdDtm(ZonedDateTime.now());
 
         log.debug("itemObj=[{}]",itemObj);
         return itemObj;

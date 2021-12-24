@@ -1,3 +1,6 @@
+#server:
+#  port: 8090
+
 spring:
   profiles:
     active: local
@@ -5,7 +8,8 @@ spring:
   # Spring Boot 실행시 BATCH 자동 실행 못하게 설정
   batch:
     job:
-      enabled: false
+      enabled: true
+      names: ${job.name:NONE}
 
   datasource:
     hikari:
@@ -36,9 +40,44 @@ spring:
 #  level:
 #    org.hibernate.type: trace
 
-#spring.batch.job.names: ${job.name:NONE}
-
 
 batch:
   timeznoe: Asia/Seoul
   onlineIp: http://127.0.0.1:8080/
+
+
+#
+#logging:
+#  level:
+#    root: debug
+#    org:
+#      hibernate:
+#        hql: error
+#        jpa: error
+#        SQL: debug
+#        type: error
+#        loader: error
+#        event:
+#          internal:
+#            AbstractFlushingEventListener: error
+#        engine:
+#          transaction:
+#            internal:
+#              TransactionImpl: error
+#      springframework: error
+#      ot:
+#        autoconfigure:
+#          logging: error
+#    com:
+#      querydsl.sql: trace
+#      tifscore: debug
+#  pattern:
+#    console: "%-22X{GlobalId} %d{HHmmssSSS} [%-13.13thread{13}] %highlight(%-5level) %red(%-65.65logger) : %05line| %message%n"
+#    file: "[[%-22X{GlobalId}]] %d{ISO8601} %-5level [%-13.13thread{13}] %-65.65logger:%05line| %message%n"
+#
+#  path: /Logs
+#  file:
+#    #    path: C:/hopes/shf/logs/ap
+#    name: ${logging.path}/oneQonCore/online/dev-log.log
+#    max-size: 50MB
+#    max-history: 7

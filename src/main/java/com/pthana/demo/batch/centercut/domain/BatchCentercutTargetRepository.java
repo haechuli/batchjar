@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,17 +16,17 @@ public interface BatchCentercutTargetRepository extends JpaRepository<BatchCente
 {
 
 
-    @Query("select b.grpCd," +
+    @Query(value = "select b.grpCd," +
             "         count(*) as cnt," +
             "         min(b.seqNo) as minSeqNo," +
-            "         max(b.seqNo) as max SeqNo " +
+            "         max(b.seqNo) as maxSeqNo " +
             " from BatchCentercutTarget b " +
             " where b.stCd = '0' " +
             " and b.bascDt = ?1 " +
             " and b.grpCd = ?2" +
             " group by grpCd" +
-            " order by grpCd asc")
-    List<CenterCutGroupMinMax> getMinMax(LocalDate bascDt, String grpCd);
+            " order by grpCd asc", nativeQuery = true)
+    public ArrayList<CenterCutGroupMinMax> getMinMax(LocalDate bascDt, String grpCd);
 
 
 //    public default Long getMaxSeq(LocalDate bascDt, String grpCd)

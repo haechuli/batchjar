@@ -12,7 +12,11 @@ import java.time.format.DateTimeFormatter;
 //@NoArgsConstructor
 public class CreateJobParameter {
 
+    @Value("#{jobParameters[startNo]}") // (1)
+    private Long startNo;
 
+    @Value("#{jobParameters[endNo]}") // (1)
+    private Long endNo;
 
     @Value("#{jobParameters[grpCd]}") // (1)
     private String grpCd;

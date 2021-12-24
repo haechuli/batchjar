@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -32,16 +33,17 @@ import java.sql.SQLException;
 
 
 @Slf4j
+//@Import(CreateJobParameter.class)
 @Configuration
 @RequiredArgsConstructor
 public class CenterCutMain {
 
    
 
-    @Value("${cc.limit.process.core.count:3}")
+    @Value("${cc.limit.process.core.count:16}")
     private int corePoolSize;
 
-    @Value("${cc.limit.process.max.count:5}")
+    @Value("${cc.limit.process.max.count:16}")
     private int maxPoolSize;
 
     @Value("${cc.log.prefix:Thread_CenterCut-}")
@@ -319,6 +321,8 @@ public class CenterCutMain {
         log.debug("GrdCd=[{}] NascDt=[{}]",jobCTX.getGrpCd(),jobCTX.getBascDt());
         centerCutPartitioner.setGrpCd(jobCTX.getGrpCd());
         centerCutPartitioner.setBascDt(jobCTX.getBascDt());
+        centerCutPartitioner.setStartNo(jobCTX.getStartNo());
+        centerCutPartitioner.setEndNo(jobCTX.getEndNo());
         centerCutPartitioner.setTable("BATCH_CENTERCUT_TARGET");
         centerCutPartitioner.setColumn("SEQ_NO");
 
@@ -332,7 +336,7 @@ public class CenterCutMain {
     }
 
     @Bean
-    private BatchJobListener batchJobListener() {
+    public BatchJobListener batchJobListener() {
         return new BatchJobListener();
     }
 
