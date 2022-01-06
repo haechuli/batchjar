@@ -40,10 +40,10 @@ public class CenterCutMain {
 
    
 
-    @Value("${cc.limit.process.core.count:16}")
+    @Value("${cc.limit.process.core.count:8}")
     private int corePoolSize;
 
-    @Value("${cc.limit.process.max.count:16}")
+    @Value("${cc.limit.process.max.count:8}")
     private int maxPoolSize;
 
     @Value("${cc.log.prefix:Thread_CenterCut-}")
