@@ -11,8 +11,9 @@ spring:
   # Spring Boot 실행시 BATCH 자동 실행 못하게 설정
   batch:
     job:
-      enabled: true
       names: ${job.name:NONE}
+      enabled: true
+
 
   datasource:
     hikari:

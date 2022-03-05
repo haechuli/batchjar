@@ -18,6 +18,8 @@ repositories {
 	mavenCentral()
 }
 
+
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-batch'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -38,3 +40,4 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
